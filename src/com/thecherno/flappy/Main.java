@@ -5,10 +5,8 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import java.nio.ByteBuffer;
-
-import org.lwjgl.glfw.GLFWvidmode;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
 
 import com.thecherno.flappy.graphics.Shader;
 import com.thecherno.flappy.input.Input;
@@ -34,7 +32,7 @@ public class Main implements Runnable {
 	}
 	
 	private void init() {
-		if (glfwInit() != GL_TRUE) {
+		if (glfwInit() != true) {
 			System.err.println("Could not initialize GLFW!");
 			return;
 		}
@@ -46,14 +44,14 @@ public class Main implements Runnable {
 			return;
 		}
 		
-		ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-		glfwSetWindowPos(window, (GLFWvidmode.width(vidmode) - width) / 2, (GLFWvidmode.height(vidmode) - height) / 2);
+		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		glfwSetWindowPos(window, (vidmode.width() - width) / 2, (vidmode.height() - height) / 2);
 		
 		glfwSetKeyCallback(window, new Input());
 		
 		glfwMakeContextCurrent(window);
 		glfwShowWindow(window);
-		GLContext.createFromCurrent();
+		GL.createCapabilities();
 		
  		glEnable(GL_DEPTH_TEST);
 		glActiveTexture(GL_TEXTURE1);
@@ -101,7 +99,7 @@ public class Main implements Runnable {
 				updates = 0;
 				frames = 0;
 			}
-			if (glfwWindowShouldClose(window) == GL_TRUE)
+			if (glfwWindowShouldClose(window) == true)
 				running = false;
 		}
 		
