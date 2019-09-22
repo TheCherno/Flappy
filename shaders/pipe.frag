@@ -17,7 +17,7 @@ void main()
 	vec2 tc_temp = fs_in.tc;
 
 	if (top == 1)
-		tc_temp = 1.0 - fs_in.tc.y;
+		tc_temp.y = 1.0 - fs_in.tc.y;
 		
 	color = texture(tex, tc_temp);
 
