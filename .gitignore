@@ -1,0 +1,9 @@
+# ignore editors
+.vscode
+.idea
+*.iml
+
+# mac ignoreable
+.DS_Store
+
+bin
